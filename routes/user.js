@@ -1,22 +1,25 @@
-const { Router } = require("express")
-const User = require("../models/user")
+const { Router } = require("express");
+const User = require("../models/user");
+const { createTokenForUser } = require("../services/authentication");
 
 const router = Router();
 
 router.get("/signin", (req, res) => {
-    return res.render("signin")
+    return res.render("signin");
 });
 
 router.get("/signup", (req, res) => {
-    return res.render("signup")
+    return res.render("signup");
 });
 
 router.post("/signin", async (req, res) => {
     const { email, password } = req.body;
+
     const token = await User.matchPassword(password, email);
 
     console.log("token", token);
-    return res.cookie("token", token).redirect("/")
+
+    return res.cookie("token", token).redirect("/");
 });
 
 router.post("/signup", async (req, res) => {
@@ -28,7 +31,7 @@ router.post("/signup", async (req, res) => {
         password,
     });
 
-    return res.redirect("/")
+    return res.redirect("/");
 });
 
 module.exports = router;

@@ -1,6 +1,6 @@
-const JWT = require('jsonwebtoken');
+const JWT = require("jsonwebtoken");
 
-const secret = "pandeybkl"
+const secret = "pandeybkl";
 
 function createTokenForUser(user) {
     const payload = {
@@ -9,16 +9,19 @@ function createTokenForUser(user) {
         profileImageURL: user.profileImageURL,
         role: user.role,
     };
-    const token = JWT.verify(token, secret);
+
+    const token = JWT.sign(payload, secret);
+
     return token;
 }
 
 function validateToken(token) {
     const payload = JWT.verify(token, secret);
+
     return payload;
 }
 
 module.exports = {
     createTokenForUser,
     validateToken,
-}
+};
