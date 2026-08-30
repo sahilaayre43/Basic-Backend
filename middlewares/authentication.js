@@ -1,0 +1,21 @@
+const { validateToken } = require("../services/authentication");
+
+function cheackForAuthenticationByCookie(cookieName) {
+    return (req, res, next) => {
+        const tokenCookieValue = req.cookies[cookieName];
+        if (!tokenCookieValue) {
+            return next();
+        }
+
+        try {
+            const payload = validateToken(tokenCookieValue);
+            res.user = payload;
+        } catch (error) {}
+
+        return next();
+    }
+}
+
+module.exports = {
+    cheackForAuthenticationByCookie
+} 
