@@ -5,6 +5,8 @@ const cookieParser = require("cookie-parser");
 const { cheackForAuthenticationByCookie } = require("./middlewares/authentication")
 require('dotenv').config();
 
+const Blog = require("./routes")
+
 const userRoute = require('./routes/user');
 const blogRoute = require('./routes/blog');
 

@@ -9,8 +9,18 @@
 
     <div class="container mt-4">
 
-        <form action="/blog/add-blog" method="post">
+        <form action="/blog" method="post" enctype="multipart/form-data">
 
+             <div class="mb-3">
+                <label for="exampleInputTitle" class="form-label">Title</label>
+                <input
+                    type="file"
+                    name="coverImage"
+                    class="form-control"
+                    id="coverImage"
+                    aria-describedby="coverImage"
+                >
+            </div>
 
             <div class="mb-3">
                 <label for="exampleInputTitle" class="form-label">Title</label>
@@ -27,7 +37,7 @@
                 <textarea
                     name="body"
                     class="form-control"
-                    id="exampleInputBody"
+                    id="body"
                 ></textarea>
             </div>
 
