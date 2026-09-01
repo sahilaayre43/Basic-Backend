@@ -9,7 +9,7 @@ function cheackForAuthenticationByCookie(cookieName) {
 
         try {
             const payload = validateToken(tokenCookieValue);
-            res.user = payload;
+            req.user = payload;
         } catch (error) {}
 
         return next();
