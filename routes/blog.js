@@ -7,11 +7,12 @@ const router = Router();
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.resolve(`./public/uploads/`));
+        cb(null, path.resolve("./public/uploads/"));
     },
+
     filename: function (req, file, cb) {
-       const fileName = `${Date.now()}-${file.originalname}`;
-       cb(null, fileName);
+        const fileName = `${Date.now()}-${file.originalname}`;
+        cb(null, fileName);
     }
 });
 
@@ -25,14 +26,15 @@ router.get("/add-blog", (req, res) => {
 
 router.post("/", upload.single("coverImage"), async (req, res) => {
     const { title, body } = req.body;
+
     const blog = await Blog.create({
         title,
         body,
         createdBy: req.user._id,
-        coverImage:`/uploads/${req.file.filename}`
+        coverImageURL: `/uploads/${req.file.filename}`
     });
+
     return res.redirect(`/blog/${blog._id}`);
 });
-
 
 module.exports = router;
